@@ -1,0 +1,1116 @@
+/* =====================================
+   RESET
+   ===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================
+   COLORS
+   ===================================== */
+
+:root {
+
+    --navy: #102a43;
+
+    --navy-dark: #0b2033;
+
+    --green: #20a36a;
+
+    --green-dark: #168456;
+
+    --light-green: #e8f6ef;
+
+    --cream: #f7f9f8;
+
+    --white: #ffffff;
+
+    --black: #18221d;
+
+    --gray: #68756e;
+
+    --border: #dce5df;
+
+}
+
+
+/* =====================================
+   BODY
+   ===================================== */
+
+body {
+
+    font-family:
+        'DM Sans',
+        Arial,
+        sans-serif;
+
+    background: var(--cream);
+
+    color: var(--black);
+
+    min-height: 100vh;
+}
+
+
+/* =====================================
+   MAIN PAGE
+   ===================================== */
+
+.page {
+
+    min-height: 100vh;
+
+    display: flex;
+}
+
+
+/* =====================================
+   LEFT PANEL
+   ===================================== */
+
+.left-panel {
+
+    width: 53%;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            145deg,
+            #102a43 0%,
+            #123b51 55%,
+            #155b55 100%
+        );
+
+    color: white;
+
+    padding: 42px 65px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Decorative shape */
+
+.left-panel::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    border: 1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 50%;
+
+    right: -280px;
+
+    top: -170px;
+}
+
+
+.left-panel::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+
+    height: 350px;
+
+    border: 1px solid
+        rgba(32,163,106,0.2);
+
+    border-radius: 50%;
+
+    left: -220px;
+
+    bottom: -180px;
+}
+
+
+/* =====================================
+   BRAND
+   ===================================== */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =====================================
+   SHIELD LOGO
+   ===================================== */
+
+.brand-logo {
+
+    width: 58px;
+
+    height: 64px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+.shield {
+
+    width: 52px;
+
+    height: 60px;
+
+    background: var(--green);
+
+    color: var(--navy-dark);
+
+    clip-path:
+        polygon(
+            50% 0%,
+            92% 13%,
+            85% 72%,
+            50% 100%,
+            15% 72%,
+            8% 13%
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.15);
+}
+
+
+.shield-star {
+
+    font-size: 10px;
+
+    margin-bottom: 1px;
+}
+
+
+.shield span {
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+/* Brand text */
+
+.brand-text strong {
+
+    display: block;
+
+    font-family:
+        'Plus Jakarta Sans',
+        sans-serif;
+
+    font-size: 20px;
+
+    letter-spacing: 1px;
+}
+
+
+.brand-text span {
+
+    display: block;
+
+    color: #b7cbc2;
+
+    font-size: 8px;
+
+    letter-spacing: 1.8px;
+
+    margin-top: 4px;
+}
+
+
+/* =====================================
+   INTRO
+   ===================================== */
+
+.intro {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 620px;
+}
+
+
+/* Tag */
+
+.tag {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #8ce1bb;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+
+    margin-bottom: 22px;
+}
+
+
+.tag span {
+
+    width: 7px;
+
+    height: 7px;
+
+    background: var(--green);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(32,163,106,0.15);
+}
+
+
+/* Heading */
+
+.intro h1 {
+
+    font-family:
+        'Plus Jakarta Sans',
+        sans-serif;
+
+    font-size: clamp(
+        48px,
+        5vw,
+        70px
+    );
+
+    line-height: 1.05;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 25px;
+}
+
+
+.intro h1 span {
+
+    color: #74d7ac;
+}
+
+
+/* Description */
+
+.intro > p {
+
+    max-width: 520px;
+
+    color: #b6c8bf;
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+    margin-bottom: 35px;
+}
+
+
+/* =====================================
+   FEATURES
+   ===================================== */
+
+.features {
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.feature {
+
+    width: 175px;
+
+    min-height: 78px;
+
+    padding: 15px;
+
+    border: 1px solid
+        rgba(255,255,255,0.08);
+
+    background:
+        rgba(255,255,255,0.035);
+
+    border-radius: 8px;
+
+    display: flex;
+
+    gap: 12px;
+
+    align-items: flex-start;
+
+    transition: 0.3s;
+}
+
+
+.feature:hover {
+
+    background:
+        rgba(255,255,255,0.07);
+
+    transform: translateY(-3px);
+}
+
+
+.feature-number {
+
+    color: #76d8ad;
+
+    font-family:
+        'Plus Jakarta Sans',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+.feature strong {
+
+    display: block;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+
+.feature span {
+
+    display: block;
+
+    color: #8da59a;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================
+   LEFT FOOTER
+   ===================================== */
+
+.left-footer {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: #779187;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+/* =====================================
+   RIGHT PANEL
+   ===================================== */
+
+.right-panel {
+
+    width: 47%;
+
+    min-height: 100vh;
+
+    background: #f6f8f7;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 40px;
+}
+
+
+/* =====================================
+   DECORATION
+   ===================================== */
+
+.decoration-circle {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+.circle-one {
+
+    width: 420px;
+
+    height: 420px;
+
+    border: 1px solid
+        rgba(32,163,106,0.08);
+
+    right: -220px;
+
+    top: -160px;
+}
+
+
+.circle-two {
+
+    width: 280px;
+
+    height: 280px;
+
+    background:
+        rgba(32,163,106,0.04);
+
+    left: -180px;
+
+    bottom: -120px;
+}
+
+
+/* =====================================
+   LOGIN WRAPPER
+   ===================================== */
+
+.login-wrapper {
+
+    width: 100%;
+
+    max-width: 440px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =====================================
+   LOGIN TOP
+   ===================================== */
+
+.login-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+
+.login-top > span {
+
+    color: #7b8780;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+}
+
+
+/* Status */
+
+.status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #6e7a72;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.status span {
+
+    width: 6px;
+
+    height: 6px;
+
+    background: var(--green);
+
+    border-radius: 50%;
+}
+
+
+/* =====================================
+   LOGIN CARD
+   ===================================== */
+
+.login-card {
+
+    background: white;
+
+    border: 1px solid
+        var(--border);
+
+    border-radius: 14px;
+
+    padding: 42px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(16,42,67,0.08);
+}
+
+
+/* =====================================
+   WELCOME
+   ===================================== */
+
+.welcome p {
+
+    color: var(--green-dark);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+
+    margin-bottom: 9px;
+}
+
+
+.welcome h2 {
+
+    font-family:
+        'Plus Jakarta Sans',
+        sans-serif;
+
+    color: var(--navy);
+
+    font-size: 29px;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 9px;
+}
+
+
+.welcome > span {
+
+    display: block;
+
+    color: var(--gray);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+}
+
+
+/* =====================================
+   FORM
+   ===================================== */
+
+.form-group {
+
+    margin-bottom: 19px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    color: #35423a;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+
+/* Input */
+
+.input-wrapper {
+
+    height: 50px;
+
+    border: 1px solid
+        #d8e1dc;
+
+    border-radius: 7px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: #fbfcfb;
+
+    transition: 0.25s;
+}
+
+
+.input-wrapper:focus-within {
+
+    border-color: var(--green);
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(32,163,106,0.08);
+}
+
+
+.input-symbol {
+
+    width: 45px;
+
+    color: var(--green-dark);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    border-right: 1px solid
+        #e1e7e3;
+}
+
+
+.input-wrapper input {
+
+    flex: 1;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    padding: 0 14px;
+
+    font-family:
+        'DM Sans',
+        sans-serif;
+
+    font-size: 12px;
+
+    color: var(--black);
+}
+
+
+.input-wrapper input::placeholder {
+
+    color: #a3ada7;
+}
+
+
+/* =====================================
+   FORM OPTIONS
+   ===================================== */
+
+.form-options {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 3px 0 25px;
+
+    font-size: 10px;
+}
+
+
+.remember {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #68736d;
+
+    cursor: pointer;
+}
+
+
+.remember input {
+
+    accent-color: var(--green);
+}
+
+
+.form-options a {
+
+    color: var(--green-dark);
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.form-options a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =====================================
+   SIGN IN BUTTON
+   ===================================== */
+
+button {
+
+    width: 100%;
+
+    height: 51px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #20a36a,
+            #168456
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    font-family:
+        'DM Sans',
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+button strong {
+
+    font-size: 19px;
+
+    font-weight: 400;
+}
+
+
+button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(32,163,106,0.22);
+}
+
+
+/* =====================================
+   REGISTER
+   ===================================== */
+
+.register {
+
+    text-align: center;
+
+    margin-top: 23px;
+
+    font-size: 10px;
+
+    color: #89938d;
+}
+
+
+.register a {
+
+    color: var(--green-dark);
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    margin-left: 4px;
+}
+
+
+/* =====================================
+   SECURITY
+   ===================================== */
+
+.security {
+
+    margin-top: 28px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid
+        #edf0ee;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+}
+
+
+.lock {
+
+    width: 25px;
+
+    height: 25px;
+
+    background: var(--light-green);
+
+    color: var(--green-dark);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.security strong {
+
+    display: block;
+
+    color: #4d5952;
+
+    font-size: 9px;
+}
+
+
+.security span {
+
+    display: block;
+
+    color: #9aa39e;
+
+    font-size: 8px;
+
+    margin-top: 2px;
+}
+
+
+/* =====================================
+   LOGIN FOOTER
+   ===================================== */
+
+.login-footer {
+
+    text-align: center;
+
+    color: #9aa39e;
+
+    font-size: 8px;
+
+    margin-top: 18px;
+}
+
+
+/* =====================================
+   RESPONSIVE
+   ===================================== */
+
+@media (max-width: 950px) {
+
+    .page {
+
+        flex-direction: column;
+    }
+
+
+    .left-panel {
+
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 40px;
+    }
+
+
+    .right-panel {
+
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 50px 25px;
+    }
+
+
+    .intro {
+
+        margin: 70px 0;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .left-panel {
+
+        padding: 30px 22px;
+    }
+
+
+    .intro h1 {
+
+        font-size: 45px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .features {
+
+        flex-direction: column;
+    }
+
+
+    .feature {
+
+        width: 100%;
+    }
+
+
+    .login-card {
+
+        padding: 30px 24px;
+    }
+
+}
+/* =====================================
+   REGISTRATION PAGE
+   ===================================== */
+
+.terms {
+    margin-bottom: 22px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.terms a {
+    color: #168456;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    margin-left: 3px;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}
