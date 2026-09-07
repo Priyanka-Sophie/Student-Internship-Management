@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Internships | SIMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-shell">
+
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+
+        <a class="dashboard-brand" href="{{ url_for('dashboard') }}">
+            <span class="dashboard-shield"><span>★</span>SIMS</span>
+            <span class="dashboard-brand-copy">
+                <strong>SIMS</strong>
+                <small>STUDENT INTERNSHIP</small>
+            </span>
+        </a>
+
+        <div class="dashboard-student-card">
+            <div class="student-avatar">PS</div>
+            <div>
+                <strong>{{ current_user.name }}</strong>
+                <span>Student account</span>
+            </div>
+        </div>
+
+        <nav class="dashboard-nav" aria-label="Student navigation">
+            <p>MAIN MENU</p>
+
+            <a href="{{ url_for('dashboard') }}">
+                <span class="nav-icon">⌂</span>Dashboard
+            </a>
+
+            <a href="{{ url_for('profile') }}">
+                <span class="nav-icon">◉</span>My Profile
+                <span class="nav-status">{{ profile_percent }}%</span>
+            </a>
+
+            <a href="{{ url_for('resume') }}">
+                <span class="nav-icon">▣</span>My Resume
+            </a>
+
+            <a class="active" href="{{ url_for('internships') }}">
+                <span class="nav-icon">⌕</span>Explore Internships
+            </a>
+
+            <a href="{{ url_for('recommendations') }}">
+                <span class="nav-icon">✦</span>Recommendations
+            </a>
+
+            <a href="{{ url_for('applications') }}">
+                <span class="nav-icon">◌</span>My Applications
+            </a>
+        </nav>
+
+        <div class="sidebar-help">
+            <span class="help-icon">?</span>
+            <div>
+                <strong>Need help?</strong>
+                <span class="support-unavailable">Support centre coming soon</span>
+            </div>
+        </div>
+
+        <a class="sidebar-signout" href="{{ url_for('logout') }}">
+            <span>↗</span> Sign out
+        </a>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="dashboard-main internships-main">
+
+        <header class="dashboard-header student-page-header">
+
+            <div>
+                <p class="dashboard-eyebrow">EXPLORE INTERNSHIPS</p>
+                <h1>Find an opportunity that fits you.</h1>
+                <p class="dashboard-subtitle">
+                    Browse active internships and see where your skills can take you.
+                </p>
+            </div>
+
+            <div class="dashboard-header-actions">
+                <div class="opportunity-count">
+                    <b>{{ internships|length }}</b> active opportunities
+                </div>
+
+                <button class="notification-button" disabled>♧</button>
+                <button class="profile-menu" disabled><b>PS</b></button>
+            </div>
+
+        </header>
+
+        <!-- Search -->
+        <form class="internship-search-card" action="{{ url_for('internships') }}" method="get">
+
+            <div class="search-input-wrap">
+                <span>⌕</span>
+                <input type="search" name="q" value="{{ query }}" placeholder="Search role, company, field, or location">
+            </div>
+
+            <button class="search-button" type="submit">
+                SEARCH <b>→</b>
+            </button>
+
+            {% if query %}<a class="clear-filter" href="{{ url_for('internships') }}">Clear search</a>{% endif %}
+
+        </form>
+
+        <!-- Featured -->
+        <section class="internship-featured">
+
+            <div class="featured-copy">
+
+                <span class="featured-label">MATCHES YOUR PROFILE</span>
+
+                {% if internships %}
+                    {% set featured = internships[0] %}
+
+                    <h2>{{ featured.title }}</h2>
+
+                    <p>
+                        {{ featured.company }}
+                        <i>•</i>
+                        {{ featured.location }}
+                        <i>•</i>
+                        {{ featured.mode }}
+                    </p>
+
+                    <div class="featured-tags">
+                        <span>{{ featured.category }}</span>
+                        <span>{{ featured.duration }}</span>
+                    </div>
+
+                    <small>
+                        <b>✓</b> Recommended internship.
+                    </small>
+
+                {% else %}
+
+                    <h2>No internships available</h2>
+
+                {% endif %}
+
+            </div>
+
+            <div class="featured-match">
+
+                {% if internships %}
+                    <span>FEATURED</span>
+                    <strong>Live</strong>
+                    <small>{{ featured.stipend }}</small>
+
+                    <a href="{{ url_for('internship_detail', slug=featured.slug) }}">
+                        View opportunity →
+                    </a>
+                {% endif %}
+
+            </div>
+
+            <div class="featured-decor decor-dot-one"></div>
+            <div class="featured-decor decor-dot-two"></div>
+
+        </section>
+
+        <!-- Internship List -->
+        <section class="internship-list-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p>ALL OPPORTUNITIES</p>
+                    <h2>Internships for you</h2>
+                </div>
+
+                <div class="sort-select">
+                    Sort by:
+                    <button disabled>Most relevant</button>
+                </div>
+
+            </div>
+
+            <div class="internship-list-grid">
+
+                {% for internship in internships %}
+
+                <article class="browse-internship-card">
+
+                    <div class="browse-card-top">
+
+                        <span class="company-mark">
+                            {{ internship.company[0] }}
+                        </span>
+
+                        <span class="browse-match">
+                            Live
+                        </span>
+
+                    </div>
+
+                    <h3>{{ internship.title }}</h3>
+
+                    <p class="browse-company">
+                        {{ internship.company }}
+                        <i>•</i>
+                        {{ internship.location }}
+                    </p>
+
+                    <div class="browse-metadata">
+                        <span>{{ internship.duration }}</span>
+                        <span>{{ internship.stipend }}</span>
+                    </div>
+
+                    <div class="browse-tags">
+                        <span>{{ internship.category }}</span>
+                        <span>{{ internship.mode }}</span>
+                    </div>
+
+                    <div class="browse-card-footer">
+
+                        <span class="eligible-label">
+                            <i></i>
+                            {{ internship.qualification }}
+                        </span>
+
+                        <a href="{{ url_for('internship_detail', slug=internship.slug) }}">
+                            View role →
+                        </a>
+
+                    </div>
+
+                </article>
+
+                {% else %}
+
+                <article class="browse-more-card">
+
+                    <span>✦</span>
+
+                    <h3>No internships found.</h3>
+
+                    <p>
+                        Check back later for new opportunities.
+                    </p>
+
+                </article>
+
+                {% endfor %}
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

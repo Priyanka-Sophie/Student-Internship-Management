@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | SIMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a class="dashboard-brand" href="{{ url_for('dashboard') }}" aria-label="SIMS dashboard home">
+                <span class="dashboard-shield"><span>★</span>SIMS</span>
+                <span class="dashboard-brand-copy"><strong>SIMS</strong><small>STUDENT INTERNSHIP</small></span>
+            </a>
+
+            <div class="dashboard-student-card">
+                <div class="student-avatar">{{ current_user.name[:2]|upper }}</div>
+                <div><strong>{{ current_user.name }}</strong><span>Student account</span></div>
+            </div>
+
+            <nav class="dashboard-nav" aria-label="Student navigation">
+                <p>MAIN MENU</p>
+                <a href="{{ url_for('dashboard') }}"><span class="nav-icon">⌂</span>Dashboard</a>
+                <a class="active" href="{{ url_for('profile') }}"><span class="nav-icon">◉</span>My Profile<span class="nav-status">{{ profile_percent }}%</span></a>
+                <a href="{{ url_for('resume') }}"><span class="nav-icon">▣</span>My Resume</a>
+                <a href="{{ url_for('internships') }}"><span class="nav-icon">⌕</span>Explore Internships</a>
+                <a href="{{ url_for('recommendations') }}"><span class="nav-icon">✦</span>Recommendations</a>
+                <a href="{{ url_for('applications') }}"><span class="nav-icon">◌</span>My Applications</a>
+            </nav>
+
+            <div class="sidebar-help">
+                <span class="help-icon">?</span>
+                <div><strong>Need help?</strong><span class="support-unavailable">Support centre coming soon</span></div>
+            </div>
+
+            <a class="sidebar-signout" href="{{ url_for('logout') }}"><span>↗</span> Sign out</a>
+        </aside>
+
+        <main class="dashboard-main profile-main">
+            <header class="dashboard-header profile-header">
+                <div>
+                    <a class="back-to-dashboard" href="{{ url_for('dashboard') }}">← Back to dashboard</a>
+                    <p class="dashboard-eyebrow">STUDENT PROFILE</p>
+                    <h1>Build a profile that gets noticed.</h1>
+                    <p class="dashboard-subtitle">Your details help SIMS find opportunities that genuinely suit you.</p>
+                </div>
+                <div class="dashboard-header-actions">
+                    <div class="profile-updated"><span>✓</span> Profile in progress</div>
+                    <button class="notification-button" type="button" disabled aria-label="Notifications">♧<span></span></button>
+                    <button class="profile-menu" type="button" disabled aria-label="Open profile menu"><b>PS</b><span>⌄</span></button>
+                </div>
+            </header>
+
+            <section class="profile-identity-card" aria-labelledby="identity-heading">
+                <div class="profile-avatar-large">PS<span class="avatar-edit">✎</span></div>
+                <div class="profile-identity-copy">
+                    <p>YOUR STUDENT PROFILE</p>
+                    <h2 id="identity-heading">{{ current_user.name }}</h2>
+                    <span>Student ID: <strong>{{ current_user.student_id }}</strong> <i>•</i> Your SIMS account</span>
+                </div>
+                <div class="identity-completion">
+                    <div><strong>{{ profile_percent }}%</strong><span>Profile complete</span></div>
+                    <div class="profile-ring" style="background: conic-gradient(var(--green) 0 {{ profile_percent }}%, #e1eee7 {{ profile_percent }}% 100%);"><span>{{ profile_percent }}</span></div>
+                </div>
+            </section>
+
+            <div class="profile-page-grid">
+                <section class="profile-form-panel" aria-labelledby="personal-details-heading">
+                    <div class="profile-section-heading">
+                        <div class="profile-section-icon account-icon">◉</div>
+                        <div>
+                            <p>STEP 1 OF 3</p>
+                            <h2 id="personal-details-heading">Personal & academic details</h2>
+                            <span>Tell us a little about your current academic journey.</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-form-divider"></div>
+
+                    <form action="{{ url_for('profile') }}" method="post">
+                    {% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<p class="auth-message {{ category }}">{{ message }}</p>{% endfor %}{% endwith %}
+                    <div class="profile-field-grid">
+                        <label class="profile-field profile-field-wide">
+                            <span>FULL NAME</span>
+                            <input type="text" value="{{ current_user.name }}" aria-label="Full name" readonly>
+                        </label>
+                        <label class="profile-field">
+                            <span>STUDENT ID</span>
+                            <input class="read-only-input" type="text" value="{{ current_user.student_id }}" readonly aria-label="Student ID">
+                        </label>
+                        <label class="profile-field">
+                            <span>EMAIL ADDRESS</span>
+                            <input class="read-only-input" type="email" value="{{ current_user.email }}" readonly aria-label="Email address">
+                        </label>
+                        <label class="profile-field profile-field-wide">
+                            <span>QUALIFICATION</span>
+                            <select name="qualification" aria-label="Qualification" required>
+                                <option value="" {% if not student.qualification %}selected{% endif %} disabled>Select your current qualification</option>
+                                <option {% if student.qualification == 'B.Sc Computer Science' %}selected{% endif %}>B.Sc Computer Science</option>
+                                <option {% if student.qualification == 'BCA' %}selected{% endif %}>BCA</option>
+                                <option {% if student.qualification == 'B.E. / B.Tech' %}selected{% endif %}>B.E. / B.Tech</option>
+                                <option {% if student.qualification == 'B.Sc Information Technology' %}selected{% endif %}>B.Sc Information Technology</option>
+                                <option {% if student.qualification == 'Other' %}selected{% endif %}>Other</option>
+                            </select>
+                        </label>
+                        <label class="profile-field">
+                            <span>SPECIALISATION / BRANCH</span>
+                            <input name="specialization" type="text" value="{{ student.specialization or '' }}" placeholder="e.g. Computer Science" aria-label="Specialisation or branch" required>
+                        </label>
+                        <label class="profile-field">
+                            <span>CURRENT YEAR OF STUDY</span>
+                            <select name="year" aria-label="Current year of study" required>
+                                <option value="" {% if not student.year %}selected{% endif %} disabled>Select year</option>
+                                <option {% if student.year == 'First year' %}selected{% endif %}>First year</option>
+                                <option {% if student.year == 'Second year' %}selected{% endif %}>Second year</option>
+                                <option {% if student.year == 'Third year' %}selected{% endif %}>Third year</option>
+                                <option {% if student.year == 'Final year' %}selected{% endif %}>Final year</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <section class="profile-subsection" aria-labelledby="skills-heading">
+                        <div class="subsection-title-row">
+                            <div><h3 id="skills-heading">Your skills</h3><p>Add skills you are comfortable using.</p></div>
+                            <span class="required-note">Recommended</span>
+                        </div>
+                        <div class="selected-skills" id="selectedSkills">
+                            {% for row in skills %}<span>{{ row.skill }}</span>{% else %}<span class="profile-empty-skills">Upload a resume to add detected skills.</span>{% endfor %}
+                        </div>
+                        <div class="add-skill-row">
+                            <input type="text" placeholder="Skills are saved from your resume" aria-label="Skills are saved from your resume" disabled>
+                            <button type="button" disabled>Resume managed</button>
+                        </div>
+                    </section>
+
+                    <section class="profile-subsection interests-section" aria-labelledby="interests-heading">
+                        <div class="subsection-title-row">
+                            <div><h3 id="interests-heading">Areas you are interested in</h3><p>Choose up to three areas to improve your recommendations.</p></div>
+                        </div>
+                        <div class="interest-options">
+                            <label><input type="checkbox" checked><span>Data & Analytics</span></label>
+                            <label><input type="checkbox"><span>Web Development</span></label>
+                            <label><input type="checkbox"><span>Software Engineering</span></label>
+                            <label><input type="checkbox"><span>UI / UX Design</span></label>
+                            <label><input type="checkbox"><span>Cybersecurity</span></label>
+                            <label><input type="checkbox"><span>Cloud & DevOps</span></label>
+                        </div>
+                    </section>
+
+                    <div class="profile-save-row">
+                        <span>Skills shown here are read from your latest uploaded resume.</span>
+                        <button class="profile-save-button" type="submit">SAVE & CONTINUE <b>→</b></button>
+                    </div>
+                    </form>
+                </section>
+
+                <aside class="profile-side-panel">
+                    <section class="profile-checklist-card" aria-labelledby="checklist-heading">
+                        <p>PROFILE COMPLETION</p>
+                        <h2 id="checklist-heading">A stronger profile means stronger matches.</h2>
+                        <div class="side-progress-track" aria-label="Profile completion {{ profile_percent }} percent"><span style="width: {{ profile_percent }}%"></span></div>
+                        <ol class="profile-checklist">
+                            <li class="complete"><span>✓</span><div><strong>Account created</strong><small>Completed</small></div></li>
+                            <li class="{% if academic_complete %}complete{% else %}current{% endif %}"><span>{% if academic_complete %}✓{% else %}2{% endif %}</span><div><strong>Add your academic details</strong><small>{% if academic_complete %}Completed{% else %}In progress{% endif %}</small></div></li>
+                            <li class="{% if student.resume_path %}complete{% elif academic_complete %}current{% endif %}"><span>{% if student.resume_path %}✓{% else %}3{% endif %}</span><div><strong>Upload your resume</strong><small>{% if student.resume_path %}Completed{% elif academic_complete %}Ready to upload{% else %}Up next{% endif %}</small></div></li>
+                        </ol>
+                    </section>
+
+                    <section class="profile-tip-card">
+                        <div class="tip-symbol">✦</div>
+                        <p>PROFILE TIP</p>
+                        <h2>Be specific about your skills.</h2>
+                        <span>For example, use “Python” and “SQL” instead of “programming” to receive more accurate matches.</span>
+                    </section>
+
+                    <section class="profile-privacy-card">
+                        <span class="privacy-symbol">⌑</span>
+                        <div><strong>Your information stays private.</strong><p>Only you and authorised SIMS administrators can access it.</p></div>
+                    </section>
+                </aside>
+            </div>
+        </main>
+    </div>
+    <!-- Skills are database values detected from the latest uploaded resume. -->
+    <script>
+        const selectedSkills = document.getElementById('selectedSkills');
+        const newSkill = document.getElementById('newSkill');
+        const addSkillButton = document.getElementById('addSkillButton');
+
+        function addSkill() {
+            const skill = newSkill.value.trim();
+            const existingSkills = [...selectedSkills.querySelectorAll('span')].map((item) => item.firstChild.textContent.trim().toLowerCase());
+            if (!skill || existingSkills.includes(skill.toLowerCase())) return;
+
+            const chip = document.createElement('span');
+            chip.append(document.createTextNode(skill + ' '));
+            const removeButton = document.createElement('button');
+            removeButton.className = 'remove-skill';
+            removeButton.type = 'button';
+            removeButton.setAttribute('aria-label', 'Remove ' + skill + ' skill');
+            removeButton.textContent = '×';
+            chip.append(removeButton);
+            selectedSkills.append(chip);
+            newSkill.value = '';
+        }
+
+        if (addSkillButton) addSkillButton.addEventListener('click', addSkill);
+        if (newSkill) newSkill.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addSkill();
+            }
+        });
+        if (selectedSkills) selectedSkills.addEventListener('click', (event) => {
+            if (event.target.classList.contains('remove-skill')) event.target.parentElement.remove();
+        });
+    </script>
+</body>
+
+</html>

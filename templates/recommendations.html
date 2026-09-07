@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations | SIMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a class="dashboard-brand" href="{{ url_for('dashboard') }}"><span class="dashboard-shield"><span>★</span>SIMS</span><span class="dashboard-brand-copy"><strong>SIMS</strong><small>STUDENT INTERNSHIP</small></span></a>
+            <div class="dashboard-student-card"><div class="student-avatar">PS</div><div><strong>Priyanka Sophie</strong><span>Student account</span></div></div>
+            <nav class="dashboard-nav" aria-label="Student navigation"><p>MAIN MENU</p><a href="{{ url_for('dashboard') }}"><span class="nav-icon">⌂</span>Dashboard</a><a href="{{ url_for('profile') }}"><span class="nav-icon">◉</span>My Profile<span class="nav-status">45%</span></a><a href="{{ url_for('resume') }}"><span class="nav-icon">▣</span>My Resume</a><a href="{{ url_for('internships') }}"><span class="nav-icon">⌕</span>Explore Internships</a><a class="active" href="{{ url_for('recommendations') }}"><span class="nav-icon">✦</span>Recommendations</a><a href="{{ url_for('applications') }}"><span class="nav-icon">◌</span>My Applications</a></nav>
+            <div class="sidebar-help"><span class="help-icon">?</span><div><strong>Need help?</strong><span class="support-unavailable">Support centre coming soon</span></div></div><a class="sidebar-signout" href="{{ url_for('logout') }}"><span>↗</span> Sign out</a>
+        </aside>
+
+        <main class="dashboard-main recommendations-main">
+            <header class="dashboard-header student-page-header">
+                <div><p class="dashboard-eyebrow">PERSONALISED FOR YOU</p><h1>Your internship recommendations.</h1><p class="dashboard-subtitle">These opportunities are ranked using your profile, skills and interests.</p></div>
+                <div class="dashboard-header-actions"><div class="recommendations-updated"><i></i> Updated today</div><button class="notification-button" type="button" disabled aria-label="Notifications">♧<span></span></button><button class="profile-menu" type="button" disabled aria-label="Open profile menu"><b>PS</b><span>⌄</span></button></div>
+            </header>
+
+            <section class="recommendation-summary-card" aria-labelledby="summary-heading"><div class="summary-orbit"><span>12</span></div><div><p>YOUR RECOMMENDATION SUMMARY</p><h2 id="summary-heading">We found <span>12 internships</span> that suit your profile.</h2><span>Complete your profile and upload a resume to make your matches even more accurate.</span></div><a href="{{ url_for('profile') }}">Improve my profile <b>→</b></a><div class="summary-orbit-decor"></div></section>
+
+            <section class="recommendation-section-page" aria-labelledby="best-matches-heading"><div class="section-heading"><div><p>BEST MATCHES</p><h2 id="best-matches-heading">Strong matches for you</h2></div><span class="recommendation-count">3 opportunities</span></div>
+                <div class="recommendation-list">
+                    <article class="recommendation-row featured-recommendation"><div class="recommendation-rank">1</div><div class="company-mark technova">T</div><div class="recommendation-role"><h3>Data Analyst Intern <span>Top match</span></h3><p>TechNova <i>•</i> Bangalore <i>•</i> Hybrid</p><div class="recommendation-tags"><span>Python</span><span>SQL</span><span>Data Analysis</span></div></div><div class="recommendation-why"><p><b>Why recommended</b>Your Python and SQL skills match the main requirements, and your qualification satisfies the eligibility criteria.</p></div><div class="recommendation-score"><strong>88<small>%</small></strong><span>Match score</span></div><a class="recommendation-view" href="{{ url_for('internship_detail', slug='data-analyst-intern') }}">View role <b>→</b></a></article>
+                    <article class="recommendation-row"><div class="recommendation-rank">2</div><div class="company-mark pixelworks">P</div><div class="recommendation-role"><h3>Frontend Developer Intern</h3><p>PixelWorks <i>•</i> Remote</p><div class="recommendation-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div></div><div class="recommendation-why"><p><b>Why recommended</b>Your web development skills align with this role, and it is available remotely.</p></div><div class="recommendation-score"><strong>76<small>%</small></strong><span>Match score</span></div><a class="recommendation-view" href="{{ url_for('internship_detail', slug='frontend-developer-intern') }}">View role <b>→</b></a></article>
+                    <article class="recommendation-row"><div class="recommendation-rank">3</div><div class="company-mark insightlabs">I</div><div class="recommendation-role"><h3>Business Intelligence Intern</h3><p>InsightLabs <i>•</i> Hyderabad</p><div class="recommendation-tags"><span>Excel</span><span>SQL</span><span>Power BI</span></div></div><div class="recommendation-why"><p><b>Why recommended</b>Your interest in Data & Analytics and your SQL skill make this a relevant opportunity.</p></div><div class="recommendation-score"><strong>71<small>%</small></strong><span>Match score</span></div><a class="recommendation-view" href="{{ url_for('internship_detail', slug='business-intelligence-intern') }}">View role <b>→</b></a></article>
+                </div>
+            </section>
+
+            <section class="recommendation-section-page good-match-section" aria-labelledby="good-matches-heading"><div class="section-heading"><div><p>MORE TO EXPLORE</p><h2 id="good-matches-heading">Good matches</h2></div><a href="{{ url_for('internships') }}">Browse all internships <b>→</b></a></div><div class="good-match-grid"><article class="good-match-card"><div><span class="company-mark greenbyte">G</span><span class="score-pill">64% match</span></div><h3>Software Development Intern</h3><p>GreenByte <i>•</i> Chennai</p><small>Python and API experience make this a promising role for you.</small><a href="{{ url_for('internship_detail', slug='software-development-intern') }}">View opportunity <b>→</b></a></article><article class="good-match-card"><div><span class="company-mark designly">D</span><span class="score-pill">58% match</span></div><h3>UI/UX Design Intern</h3><p>Designly <i>•</i> Remote</p><small>Explore this opportunity if you are interested in user-focused design.</small><a href="{{ url_for('internship_detail', slug='ui-ux-design-intern') }}">View opportunity <b>→</b></a></article><article class="more-matches-card"><span>↗</span><h3>Want more accurate matches?</h3><p>Add your academic details and upload your resume.</p><a href="{{ url_for('resume') }}">Upload resume <b>→</b></a></article></div></section>
+        </main>
+    </div>
+</body>
+</html>

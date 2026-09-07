@@ -265,7 +265,15 @@
                     </div>
 
 
-                    <form>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <p class="auth-message {{ category }}">{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form action="{{ url_for('login') }}" method="post">
 
 
                         <!-- Student ID -->
@@ -287,7 +295,9 @@
                                 <input
                                     type="text"
                                     id="studentId"
+                                    name="identifier"
                                     placeholder="Enter your student ID or email"
+                                    required
                                 >
 
                             </div>
@@ -314,7 +324,9 @@
                                 <input
                                     type="password"
                                     id="password"
+                                    name="password"
                                     placeholder="Enter your password"
+                                    required
                                 >
 
                             </div>
@@ -329,7 +341,7 @@
 
                             <label class="remember">
 
-                                <input type="checkbox">
+                                <input type="checkbox" name="remember">
 
                                 <span>
                                     Remember me
@@ -338,9 +350,9 @@
                             </label>
 
 
-                            <a href="#">
-                                Forgot password?
-                            </a>
+                            <span class="form-placeholder-link">
+                                Forgot password? (coming soon)
+                            </span>
 
 
                         </div>
@@ -410,6 +422,10 @@
 
                     © 2026 Student Internship Management System
 
+                </p>
+
+                <p class="admin-access-link">
+                    Administrator? <a href="{{ url_for('admin_login') }}">Sign in here</a>
                 </p>
 
 

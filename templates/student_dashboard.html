@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SIMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a class="dashboard-brand" href="{{ url_for('dashboard') }}" aria-label="SIMS dashboard home">
+                <span class="dashboard-shield"><span>★</span>SIMS</span>
+                <span class="dashboard-brand-copy">
+                    <strong>SIMS</strong>
+                    <small>STUDENT INTERNSHIP</small>
+                </span>
+            </a>
+
+            <div class="dashboard-student-card">
+                <div class="student-avatar">PS</div>
+                <div>
+                    <strong>Priyanka Sophie</strong>
+                    <span>Student account</span>
+                </div>
+            </div>
+
+            <nav class="dashboard-nav" aria-label="Student navigation">
+                <p>MAIN MENU</p>
+                <a class="active" href="{{ url_for('dashboard') }}"><span class="nav-icon">⌂</span>Dashboard</a>
+                <a href="{{ url_for('profile') }}"><span class="nav-icon">◉</span>My Profile<span class="nav-status">45%</span></a>
+                <a href="{{ url_for('resume') }}"><span class="nav-icon">▣</span>My Resume</a>
+                <a href="{{ url_for('internships') }}"><span class="nav-icon">⌕</span>Explore Internships</a>
+                <a href="{{ url_for('recommendations') }}"><span class="nav-icon">✦</span>Recommendations</a>
+                <a href="{{ url_for('applications') }}"><span class="nav-icon">◌</span>My Applications</a>
+            </nav>
+
+            <div class="sidebar-help">
+                <span class="help-icon">?</span>
+                <div>
+                    <strong>Need help?</strong>
+                    <span class="support-unavailable">Support centre coming soon</span>
+                </div>
+            </div>
+
+            <a class="sidebar-signout" href="{{ url_for('logout') }}"><span>↗</span> Sign out</a>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <p class="dashboard-eyebrow">STUDENT DASHBOARD</p>
+                    <h1>Good morning, Priyanka <span>✦</span></h1>
+                    <p class="dashboard-subtitle">Here is a quick look at your internship journey.</p>
+                </div>
+                <div class="dashboard-header-actions">
+                    <div class="today-date"><span>◷</span> Monday, 06 September</div>
+                    <button class="notification-button" type="button" disabled aria-label="Notifications">♧<span></span></button>
+                    <button class="profile-menu" type="button" disabled aria-label="Open profile menu"><b>PS</b><span>⌄</span></button>
+                </div>
+            </header>
+
+            <section class="profile-progress-card" aria-labelledby="profile-progress-heading">
+                <div class="progress-copy">
+                    <div class="progress-icon">↗</div>
+                    <div>
+                        <p>GET STARTED</p>
+                        <h2 id="profile-progress-heading">Complete your profile to unlock better matches.</h2>
+                        <span>Add your education, skills and interests so SIMS can personalise your recommendations.</span>
+                    </div>
+                </div>
+                <div class="progress-action">
+                    <div class="profile-percent"><strong>45%</strong><span>Complete</span></div>
+                    <div class="progress-track" aria-label="Profile is 45 percent complete"><span></span></div>
+                    <a href="{{ url_for('profile') }}">Complete profile <b>→</b></a>
+                </div>
+            </section>
+
+            <section class="dashboard-metrics" aria-label="Internship summary">
+                <article class="metric-card">
+                    <div class="metric-top"><span class="metric-icon green">✦</span><span class="metric-trend">+3 this week</span></div>
+                    <strong>12</strong>
+                    <p>Recommended for you</p>
+                </article>
+                <article class="metric-card">
+                    <div class="metric-top"><span class="metric-icon blue">⌂</span><span class="metric-trend neutral">Ready to explore</span></div>
+                    <strong>48</strong>
+                    <p>Active internships</p>
+                </article>
+                <article class="metric-card">
+                    <div class="metric-top"><span class="metric-icon amber">↗</span><span class="metric-trend neutral">Keep going</span></div>
+                    <strong>0</strong>
+                    <p>Applications submitted</p>
+                </article>
+                <article class="metric-card resume-metric">
+                    <div class="metric-top"><span class="metric-icon purple">▣</span><span class="metric-trend neutral">Not uploaded</span></div>
+                    <strong>Resume</strong>
+                    <p>Upload it to improve matches</p>
+                </article>
+            </section>
+
+            <section class="recommendation-section" aria-labelledby="recommendations-heading">
+                <div class="section-heading">
+                    <div>
+                        <p>TAILORED FOR YOU</p>
+                        <h2 id="recommendations-heading">Top recommendations</h2>
+                    </div>
+                    <a href="{{ url_for('recommendations') }}">View all recommendations <b>→</b></a>
+                </div>
+
+                <div class="recommendation-grid">
+                    <article class="internship-card featured-internship">
+                        <div class="internship-card-top">
+                            <div class="company-mark technova">T</div>
+                            <button class="bookmark-button" type="button" disabled aria-label="Save Data Analyst Intern">♡</button>
+                        </div>
+                        <div class="internship-title-row"><h3>Data Analyst Intern</h3><span class="match-badge">88% match</span></div>
+                        <p class="company-name">TechNova <span>•</span> Bangalore</p>
+                        <div class="internship-tags"><span>Python</span><span>SQL</span><span>Data Analysis</span></div>
+                        <div class="match-reason"><span>✓</span><p>Your Python and SQL skills are a strong match.</p></div>
+                        <div class="internship-card-footer"><span class="eligible-label"><i></i> Eligible</span><a href="{{ url_for('internship_detail', slug='data-analyst-intern') }}">View role <b>→</b></a></div>
+                    </article>
+
+                    <article class="internship-card">
+                        <div class="internship-card-top">
+                            <div class="company-mark pixelworks">P</div>
+                            <button class="bookmark-button" type="button" disabled aria-label="Save Frontend Developer Intern">♡</button>
+                        </div>
+                        <div class="internship-title-row"><h3>Frontend Developer Intern</h3><span class="match-badge">76% match</span></div>
+                        <p class="company-name">PixelWorks <span>•</span> Remote</p>
+                        <div class="internship-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                        <div class="match-reason"><span>✓</span><p>Your web development skills match this opportunity.</p></div>
+                        <div class="internship-card-footer"><span class="eligible-label"><i></i> Eligible</span><a href="{{ url_for('internship_detail', slug='frontend-developer-intern') }}">View role <b>→</b></a></div>
+                    </article>
+
+                    <article class="internship-card">
+                        <div class="internship-card-top">
+                            <div class="company-mark insightlabs">I</div>
+                            <button class="bookmark-button" type="button" disabled aria-label="Save Business Intelligence Intern">♡</button>
+                        </div>
+                        <div class="internship-title-row"><h3>Business Intelligence Intern</h3><span class="match-badge">71% match</span></div>
+                        <p class="company-name">InsightLabs <span>•</span> Hyderabad</p>
+                        <div class="internship-tags"><span>Excel</span><span>SQL</span><span>Power BI</span></div>
+                        <div class="match-reason"><span>✓</span><p>Your interest in data aligns with this role.</p></div>
+                        <div class="internship-card-footer"><span class="eligible-label"><i></i> Eligible</span><a href="{{ url_for('internship_detail', slug='business-intelligence-intern') }}">View role <b>→</b></a></div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="dashboard-bottom-grid">
+                <article class="journey-card">
+                    <div class="section-heading compact-heading"><div><p>YOUR JOURNEY</p><h2>Next steps</h2></div></div>
+                    <ol class="journey-list">
+                        <li class="done"><span>✓</span><div><strong>Create your SIMS account</strong><p>You're all set.</p></div></li>
+                        <li class="current"><span>2</span><div><strong>Complete your student profile</strong><p>Add your qualification, skills and interests.</p></div><a href="{{ url_for('profile') }}">Start</a></li>
+                        <li><span>3</span><div><strong>Upload your resume</strong><p>Help us find more relevant opportunities.</p></div></li>
+                    </ol>
+                </article>
+
+                <article class="explore-card">
+                    <p>EXPLORE OPPORTUNITIES</p>
+                    <h2>Find the internship<br>that fits your future.</h2>
+                    <span>Browse all active opportunities by role, company or location.</span>
+                    <a href="{{ url_for('internships') }}">Explore internships <b>→</b></a>
+                    <div class="explore-orb orb-one"></div><div class="explore-orb orb-two"></div>
+                </article>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | SIMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="admin-body">
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <a class="admin-brand" href="{{ url_for('admin_dashboard') }}"><span class="dashboard-shield"><span>★</span>SIMS</span><span><strong>SIMS</strong><small>ADMIN PORTAL</small></span></a>
+            <div class="admin-user"><div class="admin-avatar">AD</div><div><strong>Priyanka Sophie</strong><span>System Administrator</span></div><b>⌄</b></div>
+            <nav class="admin-nav" aria-label="Administrator navigation"><p>OVERVIEW</p><a class="active" href="{{ url_for('admin_dashboard') }}"><span>⌂</span>Dashboard</a><p>MANAGEMENT</p><a href="{{ url_for('manage_internships') }}"><span>▣</span>Internships <i>48</i></a><a href="{{ url_for('manage_students') }}"><span>◉</span>Students <i>326</i></a><a href="{{ url_for('eligibility_criteria') }}"><span>⊕</span>Eligibility Criteria</a><p>INSIGHTS</p><a href="{{ url_for('admin_reports') }}"><span>◫</span>Reports & Analytics</a></nav>
+            <div class="admin-sidebar-footer"><a href="#"><span>?</span>Help & support</a><a href="{{ url_for('login') }}"><span>↗</span>Sign out</a></div>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header"><div><p>ADMIN DASHBOARD</p><h1>Good morning, Priyanka.</h1><span>Here is what is happening across SIMS today.</span></div><div class="admin-header-actions"><div class="admin-date">◷ Monday, 06 September</div><button type="button" class="admin-notification" aria-label="Notifications">♧<i></i></button><button class="admin-profile-button" type="button"><b>AD</b><span>⌄</span></button></div></header>
+
+            <section class="admin-alert-card"><div class="admin-alert-icon">✦</div><div><p>ATTENTION NEEDED</p><h2>3 internships are approaching their application deadline.</h2><span>Review their status to make sure students do not miss an opportunity.</span></div><a href="{{ url_for('manage_internships') }}">Review internships <b>→</b></a></section>
+
+            <section class="admin-stat-grid" aria-label="System summary"><article><div class="admin-stat-top"><span class="admin-stat-icon student-stat">◉</span><small>+18 this month</small></div><strong>326</strong><p>Total students</p></article><article><div class="admin-stat-top"><span class="admin-stat-icon internship-stat">▣</span><small>+5 this month</small></div><strong>48</strong><p>Active internships</p></article><article><div class="admin-stat-top"><span class="admin-stat-icon match-stat">✦</span><small>Across all students</small></div><strong>1,284</strong><p>Recommendations generated</p></article><article><div class="admin-stat-top"><span class="admin-stat-icon application-stat">↗</span><small>+12 this week</small></div><strong>74</strong><p>Applications tracked</p></article></section>
+
+            <section class="admin-dashboard-grid">
+                <article class="admin-activity-card"><div class="admin-section-heading"><div><p>RECENT ACTIVITY</p><h2>What changed recently</h2></div><a href="#">View all <b>→</b></a></div><ul class="admin-activity-list"><li><span class="activity-icon green-activity">+</span><div><strong>New internship added</strong><p>Data Analyst Intern at TechNova <i>•</i> 12 minutes ago</p></div><a href="{{ url_for('manage_internships') }}">View</a></li><li><span class="activity-icon blue-activity">◉</span><div><strong>New student registered</strong><p>Arjun Mehta completed account setup <i>•</i> 48 minutes ago</p></div><a href="#">View</a></li><li><span class="activity-icon purple-activity">✦</span><div><strong>Recommendations refreshed</strong><p>124 student recommendations were recalculated <i>•</i> 2 hours ago</p></div><a href="#">View</a></li><li><span class="activity-icon amber-activity">!</span><div><strong>Internship deadline approaching</strong><p>Cloud Support Intern closes in 3 days <i>•</i> 3 hours ago</p></div><a href="{{ url_for('manage_internships') }}">Review</a></li></ul></article>
+                <aside class="admin-quick-card"><p>QUICK ACTIONS</p><h2>Manage your portal</h2><a href="{{ url_for('manage_internships') }}#add-internship"><span class="quick-action-icon add-action">+</span><div><strong>Add internship</strong><small>Publish a new opportunity</small></div><b>→</b></a><a href="{{ url_for('manage_internships') }}"><span class="quick-action-icon list-action">▣</span><div><strong>Manage internships</strong><small>Edit active listings</small></div><b>→</b></a><a href="{{ url_for('admin_reports') }}"><span class="quick-action-icon report-action">◫</span><div><strong>View reports</strong><small>Review portal activity</small></div><b>→</b></a></aside>
+            </section>
+
+            <section class="admin-bottom-grid"><article class="admin-category-card"><div class="admin-section-heading"><div><p>INTERNSHIP OVERVIEW</p><h2>Internships by category</h2></div><a href="{{ url_for('manage_internships') }}">Manage <b>→</b></a></div><div class="category-bars"><div><span>Data & Analytics</span><i><b style="width: 82%"></b></i><strong>16</strong></div><div><span>Software Development</span><i><b style="width: 65%"></b></i><strong>12</strong></div><div><span>Design & Creative</span><i><b style="width: 42%"></b></i><strong>8</strong></div><div><span>Business & Operations</span><i><b style="width: 35%"></b></i><strong>6</strong></div></div></article><article class="admin-profile-health"><div><span class="health-ring">76%</span><div><p>PROFILE HEALTH</p><h2>76% of students have completed profiles.</h2><span>Completed profiles produce more useful recommendations.</span></div></div><a href="#">View student insights <b>→</b></a></article></section>
+        </main>
+    </div>
+</body>
+</html>

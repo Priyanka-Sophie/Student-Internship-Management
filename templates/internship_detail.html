@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ internship.title }} | SIMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-shell">
+
+    <aside class="dashboard-sidebar">
+
+        <a class="dashboard-brand" href="{{ url_for('dashboard') }}">
+            <span class="dashboard-shield"><span>★</span>SIMS</span>
+            <span class="dashboard-brand-copy">
+                <strong>SIMS</strong>
+                <small>STUDENT INTERNSHIP</small>
+            </span>
+        </a>
+
+        <div class="dashboard-student-card">
+            <div class="student-avatar">PS</div>
+            <div>
+                <strong>Priyanka Sophie</strong>
+                <span>Student account</span>
+            </div>
+        </div>
+
+        <nav class="dashboard-nav">
+            <p>MAIN MENU</p>
+
+            <a href="{{ url_for('dashboard') }}"><span class="nav-icon">⌂</span>Dashboard</a>
+
+            <a href="{{ url_for('profile') }}">
+                <span class="nav-icon">◉</span>My Profile
+                <span class="nav-status">45%</span>
+            </a>
+
+            <a href="{{ url_for('resume') }}"><span class="nav-icon">▣</span>My Resume</a>
+
+            <a class="active" href="{{ url_for('internships') }}">
+                <span class="nav-icon">⌕</span>Explore Internships
+            </a>
+
+            <a href="{{ url_for('recommendations') }}"><span class="nav-icon">✦</span>Recommendations</a>
+
+            <a href="{{ url_for('applications') }}"><span class="nav-icon">◌</span>My Applications</a>
+        </nav>
+
+        <div class="sidebar-help">
+            <span class="help-icon">?</span>
+            <div>
+                <strong>Need help?</strong>
+                <span class="support-unavailable">Support centre coming soon</span>
+            </div>
+        </div>
+
+        <a class="sidebar-signout" href="{{ url_for('logout') }}">
+            <span>↗</span> Sign out
+        </a>
+
+    </aside>
+
+    <main class="dashboard-main detail-main">
+
+        <a class="back-to-dashboard detail-back" href="{{ url_for('internships') }}">
+            ← Back to all internships
+        </a>
+
+        <!-- Hero -->
+
+        <section class="detail-hero">
+
+            <div class="detail-company-logo">
+                {{ internship.company[0] }}
+            </div>
+
+            <div class="detail-hero-copy">
+
+                <span class="recommended-role-label">
+                    LIVE OPPORTUNITY
+                </span>
+
+                <h1>{{ internship.title }}</h1>
+
+                <p>
+                    {{ internship.company }}
+                    <i>•</i>
+                    {{ internship.location }}
+                    <i>•</i>
+                    {{ internship.mode }}
+                </p>
+
+                <div>
+                    <span>{{ internship.duration }}</span>
+                    <span>{{ internship.stipend }}</span>
+                    <span>{{ internship.category }}</span>
+                </div>
+
+            </div>
+
+            <button class="detail-save-button" disabled>
+                ♡ <span>Save</span>
+            </button>
+
+        </section>
+
+        <!-- Content -->
+
+        <div class="detail-grid">
+
+            <article class="detail-content-card">
+
+                <section class="detail-section">
+
+                    <h2>About this internship</h2>
+
+                    <p>{{ internship.description }}</p>
+
+                </section>
+
+                <section class="detail-section">
+
+                    <h2>Role overview</h2>
+
+                    <p>
+                        This internship is currently available through the SIMS internship database.
+                        More detailed responsibilities will appear here as employers publish additional information.
+                    </p>
+
+                </section>
+
+                <section class="detail-section">
+
+                    <h2>Category</h2>
+
+                    <div class="detail-skills">
+                        <span>{{ internship.category }}</span>
+                        <span>{{ internship.mode }}</span>
+                        <span>{{ internship.duration }}</span>
+                    </div>
+
+                </section>
+
+                <section class="detail-section">
+
+                    <h2>Eligibility</h2>
+
+                    <div class="eligibility-requirements">
+
+                        <div>
+                            <span>Qualification</span>
+                            <strong>{{ internship.qualification }}</strong>
+                        </div>
+
+                        <div>
+                            <span>Year of study</span>
+                            <strong>{{ internship.year }}</strong>
+                        </div>
+
+                        <div>
+                            <span>Location</span>
+                            <strong>{{ internship.location }}</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="detail-section detail-deadline">
+
+                    <span>◷</span>
+
+                    <div>
+                        <strong>Application deadline</strong>
+                        <p>{{ internship.deadline }}</p>
+                    </div>
+
+                </section>
+
+            </article>
+
+            <!-- Right Panel -->
+
+            <aside class="detail-side-panel">
+
+                <section class="your-match-card">
+
+                    <div class="match-card-heading">
+
+                        <div>
+                            <p>STATUS</p>
+                            <h2>Live</h2>
+                        </div>
+
+                        <div class="large-match-score">
+                            ✓
+                        </div>
+
+                    </div>
+
+                    <div class="match-score-track">
+                        <span style="width:100%"></span>
+                    </div>
+
+                    <div class="detail-match-points">
+
+                        <p><span>✓</span>Currently accepting applications.</p>
+
+                        <p><span>✓</span>Visible through the SIMS internship database.</p>
+
+                        <p><span>✓</span>Eligibility checking will become dynamic soon.</p>
+
+                    </div>
+
+                    <a href="{{ url_for('recommendations') }}">
+                        See all recommendations →
+                    </a>
+
+                </section>
+
+                <section class="detail-eligible-card">
+
+                    <span class="eligibility-check">✓</span>
+
+                    <div>
+                        <strong>Profile matching coming next</strong>
+                        <p>
+                            SIMS will soon compare your qualification, year and skills automatically.
+                        </p>
+                    </div>
+
+                </section>
+
+                <button class="apply-role-button" disabled>
+                    APPLICATION LINK COMING SOON ↗
+                </button>
+
+                <p class="apply-note">
+                    The Apply button will become active once the employer link is stored in the database.
+                </p>
+
+                <section class="share-role">
+
+                    <span>Share this opportunity</span>
+
+                    <button disabled>↗</button>
+
+                    <button disabled>✉</button>
+
+                    <button disabled>⧉</button>
+
+                </section>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

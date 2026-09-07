@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | SIMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="admin-login-body">
+    <div class="admin-login-layout">
+        <section class="admin-login-showcase">
+            <a class="admin-login-brand" href="{{ url_for('login') }}"><span class="dashboard-shield"><span>★</span>SIMS</span><span><strong>SIMS</strong><small>STUDENT INTERNSHIP</small></span></a>
+            <div class="admin-showcase-content">
+                <p class="admin-kicker"><i></i> SYSTEM ADMINISTRATION</p>
+                <h1>Keep opportunities<br><span>moving forward.</span></h1>
+                <p>Manage internships, maintain eligibility criteria and help students discover their next career step.</p>
+                <div class="admin-showcase-stats"><div><strong>48</strong><span>Active internships</span></div><div><strong>326</strong><span>Student profiles</span></div><div><strong>12</strong><span>New this week</span></div></div>
+            </div>
+            <div class="admin-showcase-footer"><span>SIMS ADMIN PORTAL</span><span>•</span><span>SECURE ACCESS</span></div>
+            <div class="admin-showcase-orb orb-large"></div><div class="admin-showcase-orb orb-small"></div>
+        </section>
+
+        <section class="admin-login-panel">
+            <div class="admin-login-card-wrap">
+                <div class="admin-login-top"><a href="{{ url_for('login') }}">← Back to student login</a><span><i></i> SYSTEM ONLINE</span></div>
+                <div class="admin-login-card">
+                    <div class="admin-login-heading"><p>ADMINISTRATOR ACCESS</p><h2>Sign in to SIMS Admin</h2><span>Use your administrator credentials to continue.</span></div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<p class="auth-message {{ category }}">{{ message }}</p>{% endfor %}{% endwith %}
+                    <form action="{{ url_for('admin_login') }}" method="post">
+                        <label class="admin-form-field"><span>ADMIN EMAIL</span><div><b>@</b><input type="email" name="email" placeholder="Enter your administrator email" required></div></label>
+                        <label class="admin-form-field"><span>PASSWORD</span><div><b>••</b><input type="password" name="password" placeholder="Enter your password" required></div></label>
+                        <div class="admin-login-options"><label><input type="checkbox" name="remember"> Remember this device</label></div>
+                        <button class="admin-login-button" type="submit">SIGN IN TO ADMIN <b>→</b></button>
+                    </form>
+                    <div class="admin-security-note"><span>⌑</span><div><strong>Restricted access</strong><p>This portal is reserved for authorised SIMS administrators. Create the first local account with <code>create_admin.py</code>.</p></div></div>
+                </div>
+                <p class="admin-login-footer">© 2026 Student Internship Management System</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

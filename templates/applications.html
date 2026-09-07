@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications | SIMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a class="dashboard-brand" href="{{ url_for('dashboard') }}"><span class="dashboard-shield"><span>★</span>SIMS</span><span class="dashboard-brand-copy"><strong>SIMS</strong><small>STUDENT INTERNSHIP</small></span></a>
+            <div class="dashboard-student-card"><div class="student-avatar">PS</div><div><strong>Priyanka Sophie</strong><span>Student account</span></div></div>
+            <nav class="dashboard-nav" aria-label="Student navigation">
+                <p>MAIN MENU</p>
+                <a href="{{ url_for('dashboard') }}"><span class="nav-icon">⌂</span>Dashboard</a>
+                <a href="{{ url_for('profile') }}"><span class="nav-icon">◉</span>My Profile<span class="nav-status">45%</span></a>
+                <a href="{{ url_for('resume') }}"><span class="nav-icon">▣</span>My Resume</a>
+                <a href="{{ url_for('internships') }}"><span class="nav-icon">⌕</span>Explore Internships</a>
+                <a href="{{ url_for('recommendations') }}"><span class="nav-icon">✦</span>Recommendations</a>
+                <a class="active" href="{{ url_for('applications') }}"><span class="nav-icon">◌</span>My Applications</a>
+            </nav>
+            <div class="sidebar-help"><span class="help-icon">?</span><div><strong>Need help?</strong><span class="support-unavailable">Support centre coming soon</span></div></div>
+            <a class="sidebar-signout" href="{{ url_for('logout') }}"><span>↗</span> Sign out</a>
+        </aside>
+
+        <main class="dashboard-main applications-main">
+            <header class="dashboard-header student-page-header">
+                <div><p class="dashboard-eyebrow">MY APPLICATIONS</p><h1>Keep track of your opportunities.</h1><p class="dashboard-subtitle">Follow each internship application from discovery to response.</p></div>
+                <div class="dashboard-header-actions"><div class="applications-header-count"><b>0</b> applications submitted</div><button class="notification-button" type="button" disabled aria-label="Notifications">♧</button><button class="profile-menu" type="button" disabled aria-label="Open profile menu"><b>PS</b><span>⌄</span></button></div>
+            </header>
+
+            <section class="application-progress-banner">
+                <div class="application-progress-icon">↗</div>
+                <div><p>YOUR APPLICATION JOURNEY</p><h2>Start with an internship that matches your profile.</h2><span>When applications are enabled, SIMS will keep their status in one simple place.</span></div>
+                <a href="{{ url_for('recommendations') }}">See recommendations <b>→</b></a>
+            </section>
+
+            <section class="application-summary-grid" aria-label="Application summary">
+                <article><span class="application-summary-icon submitted-icon">↗</span><strong>0</strong><p>Submitted</p></article>
+                <article><span class="application-summary-icon review-icon">◷</span><strong>0</strong><p>Under review</p></article>
+                <article><span class="application-summary-icon offer-icon">✦</span><strong>0</strong><p>Offers received</p></article>
+            </section>
+
+            <section class="applications-empty-card">
+                <div class="empty-illustration"><span class="empty-paper">▤</span><span class="empty-spark one">✦</span><span class="empty-spark two">•</span><span class="empty-spark three">+</span></div>
+                <p>NO APPLICATIONS YET</p>
+                <h2>Your next opportunity is waiting.</h2>
+                <span>You have not applied to an internship yet. Explore opportunities or start with the roles SIMS recommends for you.</span>
+                <div><a class="primary-empty-action" href="{{ url_for('internships') }}">EXPLORE INTERNSHIPS <b>→</b></a><a class="secondary-empty-action" href="{{ url_for('recommendations') }}">VIEW RECOMMENDATIONS</a></div>
+            </section>
+
+            <section class="applications-how-it-works">
+                <div><p>HOW APPLICATION TRACKING WILL WORK</p><h2>One place for every step.</h2></div>
+                <ol>
+                    <li><span>1</span><div><strong>Discover</strong><p>Find a role that fits your profile.</p></div></li>
+                    <li><span>2</span><div><strong>Apply</strong><p>Open the company application link.</p></div></li>
+                    <li><span>3</span><div><strong>Track</strong><p>Update and review your progress here.</p></div></li>
+                </ol>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resume | SIMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-body">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar">
+            <a class="dashboard-brand" href="{{ url_for('dashboard') }}" aria-label="SIMS dashboard home">
+                <span class="dashboard-shield"><span>★</span>SIMS</span>
+                <span class="dashboard-brand-copy"><strong>SIMS</strong><small>STUDENT INTERNSHIP</small></span>
+            </a>
+
+            <div class="dashboard-student-card">
+                <div class="student-avatar">PS</div>
+                <div><strong>{{ current_user.name }}</strong><span>Student account</span></div>
+            </div>
+
+            <nav class="dashboard-nav" aria-label="Student navigation">
+                <p>MAIN MENU</p>
+                <a href="{{ url_for('dashboard') }}"><span class="nav-icon">⌂</span>Dashboard</a>
+                <a href="{{ url_for('profile') }}"><span class="nav-icon">◉</span>My Profile<span class="nav-status">45%</span></a>
+                <a class="active" href="{{ url_for('resume') }}"><span class="nav-icon">▣</span>My Resume</a>
+                <a href="{{ url_for('internships') }}"><span class="nav-icon">⌕</span>Explore Internships</a>
+                <a href="{{ url_for('recommendations') }}"><span class="nav-icon">✦</span>Recommendations</a>
+                <a href="{{ url_for('applications') }}"><span class="nav-icon">◌</span>My Applications</a>
+            </nav>
+
+            <div class="sidebar-help">
+                <span class="help-icon">?</span>
+                <div><strong>Need help?</strong><span class="support-unavailable">Support centre coming soon</span></div>
+            </div>
+
+            <a class="sidebar-signout" href="{{ url_for('logout') }}"><span>↗</span> Sign out</a>
+        </aside>
+
+        <main class="dashboard-main resume-main">
+            <header class="dashboard-header resume-header">
+                <div>
+                    <a class="back-to-dashboard" href="{{ url_for('dashboard') }}">← Back to dashboard</a>
+                    <p class="dashboard-eyebrow">MY RESUME</p>
+                    <h1>Let your experience do the talking.</h1>
+                    <p class="dashboard-subtitle">Upload your resume to help SIMS find more relevant internship opportunities.</p>
+                </div>
+                <div class="dashboard-header-actions">
+                    <div class="resume-status-header"><i></i> {{ 'Resume uploaded' if student.resume_path else 'Resume not uploaded' }}</div>
+                    <button class="notification-button" type="button" disabled aria-label="Notifications">♧<span></span></button>
+                    <button class="profile-menu" type="button" disabled aria-label="Open profile menu"><b>PS</b><span>⌄</span></button>
+                </div>
+            </header>
+
+            <section class="resume-intro-card" aria-labelledby="resume-intro-heading">
+                <div class="resume-intro-icon">▣</div>
+                <div>
+                    <p>IMPROVE YOUR RECOMMENDATIONS</p>
+                    <h2 id="resume-intro-heading">A resume gives SIMS a fuller picture of your skills and experience.</h2>
+                    <span>We use it alongside your profile to make your internship matches more accurate.</span>
+                </div>
+                <div class="resume-intro-points"><span><b>✓</b> Better skill matching</span><span><b>✓</b> More relevant roles</span></div>
+            </section>
+
+            <div class="resume-page-grid">
+                <section class="resume-upload-panel" aria-labelledby="upload-heading">
+                    <div class="resume-section-heading">
+                        <div>
+                            <p>STEP 2 OF 3</p>
+                            <h2 id="upload-heading">Upload your resume</h2>
+                            <span>Choose the latest version of your resume in PDF format.</span>
+                        </div>
+                        <span class="pdf-file-badge">PDF only</span>
+                    </div>
+<form action="{{ url_for('upload_resume') }}" method="POST" enctype="multipart/form-data">
+                    <div class="resume-drop-zone" id="resumeDropZone">
+                        <input id="resumeFile" name="resume" type="file" accept="application/pdf,.pdf" aria-label="Choose a PDF resume" required>
+                        <div class="resume-upload-symbol">⇧</div>
+                        <h3>Drag and drop your resume here</h3>
+                        <p>or choose a file from your computer</p>
+                        <label class="choose-file-button" for="resumeFile">CHOOSE PDF <b>→</b></label>
+                        <span class="upload-formats">PDF format only <i>•</i> Maximum file size: 5 MB</span>
+                    </div>
+
+                    <div class="resume-selected-file" id="resumeSelectedFile" hidden>
+                        <div class="selected-file-icon">PDF</div>
+                        <div><strong id="selectedFileName">resume.pdf</strong><span id="selectedFileDetails">Ready for upload</span></div>
+                        <button type="button" id="removeResume" aria-label="Remove selected resume">×</button>
+                    </div>
+
+                    <div class="upload-security-note"><span>⌑</span><p>Your resume is stored securely and used only to improve your internship recommendations.</p></div>
+                    <button class="resume-upload-button" id="uploadResumeButton" type="submit" disabled>UPLOAD RESUME <b>→</b></button>
+                    <p class="resume-ui-note" id="resumeUiNote">Choose a PDF to continue. SIMS will save it and extract recognised skills.</p>
+                    </form>
+                    {% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<p class="auth-message {{ category }}">{{ message }}</p>{% endfor %}{% endwith %}
+                    {% if student.resume_path %}<div class="resume-uploaded-summary"><strong>Current resume uploaded</strong><span>{{ skills|length }} skill(s) saved from the latest PDF.</span>{% if skills %}<div class="internship-tags">{% for row in skills %}<span>{{ row.skill }}</span>{% endfor %}</div>{% endif %}</div>{% endif %}
+                </section>
+
+                <aside class="resume-side-panel">
+                    <section class="resume-extract-card" aria-labelledby="extract-heading">
+                        <div class="extract-card-top"><span class="extract-symbol">✦</span><span>WHAT SIMS LOOKS FOR</span></div>
+                        <h2 id="extract-heading">Your resume helps us understand:</h2>
+                        <ul>
+                            <li><span class="extract-list-icon skills">✦</span><div><strong>Technical skills</strong><p>For example: Python, SQL, Java, Figma.</p></div></li>
+                            <li><span class="extract-list-icon education">▤</span><div><strong>Education</strong><p>Your degree, branch and current study level.</p></div></li>
+                            <li><span class="extract-list-icon projects">↗</span><div><strong>Projects & experience</strong><p>Relevant work that supports your profile.</p></div></li>
+                        </ul>
+                    </section>
+
+                    <section class="resume-help-card">
+                        <p>RESUME CHECKLIST</p>
+                        <h2>Before you upload</h2>
+                        <ul>
+                            <li><span>✓</span> Use your most recent resume</li>
+                            <li><span>✓</span> Include relevant technical skills</li>
+                            <li><span>✓</span> Save it as a PDF file</li>
+                        </ul>
+                        <span class="resume-help-unavailable">Resume help resources coming soon.</span>
+                    </section>
+                </aside>
+            </div>
+
+            <section class="resume-next-card" aria-labelledby="next-heading">
+                <div>
+                    <p>WHAT HAPPENS NEXT?</p>
+                    <h2 id="next-heading">Your resume will be checked and used to refine your recommendations.</h2>
+                </div>
+                <ol>
+                    <li><span>1</span><div><strong>Upload</strong><p>Add your PDF resume securely.</p></div></li>
+                    <li><span>2</span><div><strong>Analyse</strong><p>SIMS identifies useful details.</p></div></li>
+                    <li><span>3</span><div><strong>Recommend</strong><p>See internships that fit you.</p></div></li>
+                </ol>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const resumeFile = document.getElementById('resumeFile');
+        const selectedFile = document.getElementById('resumeSelectedFile');
+        const selectedFileName = document.getElementById('selectedFileName');
+        const selectedFileDetails = document.getElementById('selectedFileDetails');
+        const removeResume = document.getElementById('removeResume');
+        const uploadButton = document.getElementById('uploadResumeButton');
+        const uploadNote = document.getElementById('resumeUiNote');
+        const dropZone = document.getElementById('resumeDropZone');
+
+        function resetResumeSelection() {
+            resumeFile.value = '';
+            selectedFile.hidden = true;
+            dropZone.hidden = false;
+            uploadButton.disabled = true;
+            uploadNote.textContent = 'Choose a PDF to continue. SIMS will save it and extract recognised skills.';
+        }
+
+        function showSelectedResume(file) {
+            if (!file || (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf'))) {
+                resetResumeSelection();
+                uploadNote.textContent = 'Please choose a PDF file.';
+                return;
+            }
+
+            selectedFileName.textContent = file.name;
+            selectedFileDetails.textContent = `${(file.size / 1024 / 1024).toFixed(2)} MB • PDF document`;
+            selectedFile.hidden = false;
+            dropZone.hidden = true;
+            uploadButton.disabled = false;
+            uploadNote.textContent = 'Your PDF is ready for secure upload and skill extraction.';
+        }
+
+        resumeFile.addEventListener('change', () => showSelectedResume(resumeFile.files[0]));
+        removeResume.addEventListener('click', resetResumeSelection);
+    </script>
+</body>
+
+</html>

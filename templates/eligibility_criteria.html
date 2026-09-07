@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eligibility Criteria | SIMS Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="admin-body">
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <a class="admin-brand" href="{{ url_for('admin_dashboard') }}"><span class="dashboard-shield"><span>★</span>SIMS</span><span><strong>SIMS</strong><small>ADMIN PORTAL</small></span></a>
+            <div class="admin-user"><div class="admin-avatar">AD</div><div><strong>Priyanka Sophie</strong><span>System Administrator</span></div><b>⌄</b></div>
+            <nav class="admin-nav" aria-label="Administrator navigation"><p>OVERVIEW</p><a href="{{ url_for('admin_dashboard') }}"><span>⌂</span>Dashboard</a><p>MANAGEMENT</p><a href="{{ url_for('manage_internships') }}"><span>▣</span>Internships <i>48</i></a><a href="{{ url_for('manage_students') }}"><span>◉</span>Students <i>326</i></a><a class="active" href="{{ url_for('eligibility_criteria') }}"><span>⊕</span>Eligibility Criteria</a><p>INSIGHTS</p><a href="{{ url_for('admin_reports') }}"><span>◫</span>Reports & Analytics</a></nav>
+            <div class="admin-sidebar-footer"><a href="#"><span>?</span>Help & support</a><a href="{{ url_for('login') }}"><span>↗</span>Sign out</a></div>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header manage-header"><div><a class="admin-back-link" href="{{ url_for('admin_dashboard') }}">← Back to dashboard</a><p>ELIGIBILITY MANAGEMENT</p><h1>Eligibility criteria</h1><span>Review the compulsory requirements used before internship recommendations are ranked.</span></div><div class="admin-header-actions"><button class="admin-add-button" type="button" disabled>+ ADD CRITERIA</button><button type="button" class="admin-notification" disabled aria-label="Notifications">♧<i></i></button><button class="admin-profile-button" type="button" disabled><b>AD</b><span>⌄</span></button></div></header>
+
+            <section class="criteria-explainer"><span>⊕</span><div><p>HOW ELIGIBILITY WORKS</p><h2>Eligibility is checked before SIMS calculates a recommendation score.</h2><span>Students who do not meet mandatory requirements are not shown as strong matches.</span></div></section>
+
+            <section class="criteria-grid"><article class="criteria-card"><div><span class="company-mark technova">T</span><div><h2>Data Analyst Intern</h2><p>TechNova <i>•</i> Bangalore</p></div><span class="table-status active-status"><i></i> Active</span></div><dl><div><dt>Qualification</dt><dd>B.Sc Computer Science, BCA or BE / B.Tech</dd></div><div><dt>Year of study</dt><dd>Second year or above</dd></div><div><dt>Compulsory skills</dt><dd><span>Python</span><span>SQL</span></dd></div></dl><button type="button" disabled>EDIT CRITERIA <b>→</b></button></article><article class="criteria-card"><div><span class="company-mark pixelworks">P</span><div><h2>Frontend Developer Intern</h2><p>PixelWorks <i>•</i> Remote</p></div><span class="table-status active-status"><i></i> Active</span></div><dl><div><dt>Qualification</dt><dd>B.Sc Computer Science, BCA or BE / B.Tech</dd></div><div><dt>Year of study</dt><dd>First year or above</dd></div><div><dt>Compulsory skills</dt><dd><span>HTML</span><span>CSS</span></dd></div></dl><button type="button" disabled>EDIT CRITERIA <b>→</b></button></article><article class="criteria-card"><div><span class="company-mark cloudline">C</span><div><h2>Cloud Support Intern</h2><p>Cloudline <i>•</i> Pune</p></div><span class="table-status review-status"><i></i> Review</span></div><dl><div><dt>Qualification</dt><dd>B.Sc Computer Science, BCA or BE / B.Tech</dd></div><div><dt>Year of study</dt><dd>Second year or above</dd></div><div><dt>Compulsory skills</dt><dd><span>Linux</span><span>Networking</span></dd></div></dl><button type="button" disabled>EDIT CRITERIA <b>→</b></button></article></section>
+
+            <section class="criteria-note"><span>✦</span><div><strong>Next backend step</strong><p>These criteria will be stored with each internship and compared dynamically against a student's profile and parsed resume details.</p></div></section>
+        </main>
+    </div>
+</body>
+</html>

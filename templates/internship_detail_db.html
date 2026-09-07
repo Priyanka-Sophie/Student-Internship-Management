@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ internship.title }} | SIMS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="dashboard-body">
+<div class="dashboard-shell">
+    <aside class="dashboard-sidebar">
+        <a class="dashboard-brand" href="{{ url_for('dashboard') }}"><span class="dashboard-shield"><span>★</span>SIMS</span><span class="dashboard-brand-copy"><strong>SIMS</strong><small>STUDENT INTERNSHIP</small></span></a>
+        <div class="dashboard-student-card"><div class="student-avatar">{{ current_user.name[:2]|upper }}</div><div><strong>{{ current_user.name }}</strong><span>Student account</span></div></div>
+        <nav class="dashboard-nav" aria-label="Student navigation">
+            <p>MAIN MENU</p>
+            <a href="{{ url_for('dashboard') }}"><span class="nav-icon">⌂</span>Dashboard</a>
+            <a href="{{ url_for('profile') }}"><span class="nav-icon">◉</span>My Profile</a>
+            <a href="{{ url_for('resume') }}"><span class="nav-icon">▣</span>My Resume</a>
+            <a class="active" href="{{ url_for('internships') }}"><span class="nav-icon">⌕</span>Explore Internships</a>
+            <a href="{{ url_for('recommendations') }}"><span class="nav-icon">✦</span>Recommendations</a>
+            <a href="{{ url_for('applications') }}"><span class="nav-icon">◌</span>My Applications</a>
+        </nav>
+        <div class="sidebar-help"><span class="help-icon">?</span><div><strong>Need help?</strong><span class="support-unavailable">Support centre coming soon</span></div></div>
+        <a class="sidebar-signout" href="{{ url_for('logout') }}"><span>↗</span>Sign out</a>
+    </aside>
+    <main class="dashboard-main">
+        <div class="detail-back"><a class="back-to-dashboard" href="{{ url_for('internships') }}">← Back to internships</a></div>
+        <section class="detail-hero">
+            <div class="detail-company-logo company-mark">{{ internship.company[0] }}</div>
+            <div class="detail-hero-copy"><span class="recommended-role-label">LIVE INTERNSHIP • {{ internship.source_name or 'VERIFIED SOURCE' }}</span><h1>{{ internship.title }}</h1><p>{{ internship.company }} <i>•</i> {{ internship.location or 'Location not listed' }} <i>•</i> {{ internship.mode or 'See employer listing' }}</p><div><span>{{ internship.category or 'Internship' }}</span><span>Live employer link</span></div></div>
+        </section>
+        <section class="detail-grid">
+            <article class="detail-content-card">
+                <section class="detail-section"><h2>About this opportunity</h2><p>{{ internship.description or 'See the employer listing for the complete description.' }}</p></section>
+                <section class="detail-section"><h2>Skills and role relevance</h2>{% if required_skills %}<div class="detail-skills">{% for skill in required_skills %}<span>{{ skill }}</span>{% endfor %}</div>{% else %}<p>The source did not publish detailed skill requirements. SIMS uses your resume and the role category to calculate relevance.</p>{% endif %}</section>
+                <section class="detail-section"><h2>Eligibility</h2><div class="eligibility-requirements"><div><span>Qualification</span><strong>{{ internship.qualification or 'See employer listing' }}</strong></div><div><span>Study year</span><strong>{{ internship.year or 'See employer listing' }}</strong></div></div></section>
+            </article>
+            <aside class="detail-side-panel">
+                <section class="your-match-card"><div class="match-card-heading"><div><p>LIVE LISTING</p><h2>Apply through the employer site.</h2></div><strong class="large-match-score">↗</strong></div><div class="detail-match-points"><p><span>✓</span>Stored from a current public internship source.</p><p><span>✓</span>Application opens the employer’s direct ATS page.</p></div>{% if internship.application_url %}<a class="apply-role-button" href="{{ internship.application_url }}" target="_blank" rel="noopener">APPLY ON EMPLOYER SITE <b>→</b></a>{% endif %}{% if application %}<p class="apply-note">✓ Tracked in My Applications as {{ application.status }}.</p>{% else %}<form action="{{ url_for('mark_applied', slug=internship.slug) }}" method="post"><button class="detail-save-button" type="submit">MARK AS APPLIED IN SIMS</button></form><p class="apply-note">After applying on the employer website, click this to track it in SIMS.</p>{% endif %}</section>
+                <section class="detail-eligible-card"><span class="eligibility-check">i</span><div><strong>Details can change</strong><p>Always confirm requirements and closing dates on the employer’s page before applying.</p></div></section>
+            </aside>
+        </section>
+    </main>
+</div>
+</body>
+</html>
