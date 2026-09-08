@@ -105,7 +105,14 @@ def admin_required(view):
 
 
 def current_student():
-    return Student.query.filter_by(user_id=current_user.id).first()
+    student = Student.query.filter_by(user_id=current_user.id).first()
+
+    if student is None:
+        student = Student(user_id=current_user.id)
+        db.session.add(student)
+        db.session.commit()
+
+    return student
 
 
 def academic_profile_complete(student):
@@ -186,22 +193,50 @@ def register():
         return redirect(url_for("dashboard"))
 
     if request.method == "POST":
+        import re
+
         name = request.form.get("full_name", "").strip()
         student_id = request.form.get("student_id", "").strip().upper()
         email = request.form.get("email", "").strip().lower()
         password = request.form.get("password", "")
         confirm_password = request.form.get("confirm_password", "")
 
-        if not all([name, student_id, email, password]):
-            flash("Please complete every required field.", "error")
+        if not name:
+            flash("Please enter your full name.", "error")
+
+        elif not re.fullmatch(r"[A-Za-z ]{2,50}", name):
+            flash("Full name must contain only letters and spaces.", "error")
+
+        elif not student_id:
+            flash("Please enter your Student ID.", "error")
+
+        elif not re.fullmatch(r"[A-Za-z0-9._%+-]+@gmail\.com", email):
+            flash("Please enter a valid Gmail address ending with @gmail.com.", "error")
+
+        elif len(password) < 8:
+            flash("Password must contain at least 8 characters.", "error")
+
+        elif not re.search(r"[A-Z]", password):
+            flash("Password must contain at least one uppercase letter.", "error")
+
+        elif not re.search(r"[a-z]", password):
+            flash("Password must contain at least one lowercase letter.", "error")
+
+        elif not re.search(r"\d", password):
+            flash("Password must contain at least one number.", "error")
+
         elif password != confirm_password:
             flash("The two passwords do not match.", "error")
-        elif len(password) < 8:
-            flash("Use a password with at least 8 characters.", "error")
-        elif User.query.filter((User.email == email) | (User.student_id == student_id)).first():
+
+        elif User.query.filter(
+            (User.email == email) |
+            (User.student_id == student_id)
+        ).first():
             flash("An account already exists with that email or student ID.", "error")
+
         elif request.form.get("terms") != "on":
             flash("Please accept the Terms & Conditions to create an account.", "error")
+
         else:
             user = User(
                 name=name,
@@ -210,14 +245,18 @@ def register():
                 password_hash=generate_password_hash(password),
                 role="student",
             )
+
             db.session.add(user)
             db.session.flush()
+
             db.session.add(Student(user_id=user.id))
+
             db.session.commit()
+
             flash("Account created. Please sign in.", "success")
             return redirect(url_for("login"))
-    return render_template("register.html")
 
+    return render_template("register.html")
 
 @app.route("/dashboard")
 @login_required

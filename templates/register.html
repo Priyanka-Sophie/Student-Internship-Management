@@ -297,6 +297,9 @@
                                     id="fullName"
                                     name="full_name"
                                     placeholder="Enter your full name"
+                                    pattern="[A-Za-z ]{2,50}"
+                                    title="Name must contain only letters and spaces"
+                                    maxlength="50"
                                     required
                                 >
 
@@ -349,14 +352,15 @@
                                     @
                                 </div>
 
-
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Enter your email address"
-                                    required
-                                >
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your Gmail address"
+                                pattern="[A-Za-z0-9._%+-]+@gmail\.com"
+                                title="Please enter a valid Gmail address ending with @gmail.com"
+                                required
+                            >
 
                             </div>
 
